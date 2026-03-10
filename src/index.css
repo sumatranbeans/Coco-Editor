@@ -1,0 +1,527 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════
+   TYPE HIERARCHY  -  Coco Loco Solution 2.1
+   ═══════════════════════════════════════════════════════
+   Enforced throughout App.jsx. One style per level.
+
+   h2 (section titles):      text-4xl font-bold text-slate-900 tracking-tight
+   h3 (subsection titles):   text-lg font-bold text-slate-800
+   h4 (sub-subsection):      text-base font-semibold text-slate-700
+   Body text:                text-sm text-slate-600 leading-relaxed
+   Card labels:              text-xs font-mono uppercase tracking-wider
+                             (Engineering Register: text-slate-400)
+                             (Intuition Layer: text-cyan-600)
+   Table headers:            text-xs font-mono text-slate-400
+   Table cells:              text-sm text-slate-600
+   Table cell (key column):  text-sm text-slate-600 font-medium
+   Callout text:             text-sm text-slate-600
+   MetricBadge:              text-xs font-mono font-bold
+   Engineering Register vals: font-mono font-bold text-slate-800
+   Engineering Register notes: text-xs text-slate-500
+
+   DO NOT deviate from this hierarchy. All elements at the
+   same level must use the same styles. If you add a new
+   heading level or card type, document it here first.
+   ═══════════════════════════════════════════════════════ */
+
+/* Excalidraw overlay overrides  -  ONLY custom CSS allowed */
+.excalidraw-wrapper .excalidraw,
+.excalidraw-wrapper .excalidraw canvas {
+  background: transparent !important;
+}
+.excalidraw-wrapper .excalidraw [class*="welcome"],
+.excalidraw-wrapper .excalidraw [class*="WelcomeScreen"] {
+  display: none !important;
+}
+.excalidraw-wrapper .excalidraw .Island {
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(226,232,240,0.6) !important;
+  border-radius: 12px !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Print / PDF Styles  -  Document-quality output
+   Produces a clean, Google-Doc-like printed document.
+   ═══════════════════════════════════════════════════════ */
+@media print {
+  /* ── Page setup ── */
+  @page {
+    size: A4;
+    margin: 15mm 14mm 15mm 14mm;
+  }
+
+  /* ── Global resets ── */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: white !important;
+    color: #1e293b !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+    -webkit-font-smoothing: auto;
+  }
+
+  /* ── Hide interactive / screen-only elements ── */
+  .no-print {
+    display: none !important;
+  }
+
+  /* ── Remove scroll animations  -  everything visible ── */
+  .scroll-hidden {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* ── Layout: full width, no sidebar offset ── */
+  main {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Remove background from top-level container */
+  .min-h-screen {
+    background: white !important;
+    min-height: auto !important;
+  }
+
+  /* ── Typography  -  slightly smaller for print efficiency ── */
+  h1 { font-size: 20pt !important; }
+  h2 { font-size: 16pt !important; margin-top: 24pt !important; }
+  h3 { font-size: 13pt !important; }
+  h4 { font-size: 11pt !important; }
+  p, li, td, th { font-size: 10pt !important; }
+  .text-xs, .text-\[10px\], .text-\[11px\] { font-size: 8pt !important; }
+
+  /* ── Page break control ── */
+  .print-break,
+  .glossary-section {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  /* Page break before each major section (skip the first) */
+  main > section[id] + section[id] {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+    orphans: 3;
+    widows: 3;
+  }
+
+  section {
+    page-break-inside: auto;
+  }
+
+  /* ── Diagrams / Scaligraph: no animations, don't break ── */
+  .animate-flow,
+  .animate-glow,
+  .animate-pulse-slow,
+  .animate-fade-up,
+  .animate-flow-reverse,
+  .animate-bounce-slow,
+  [class*="animate-"] {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  svg {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .scaligraph-canvas,
+  [class*="diagram"],
+  .rounded-2xl:has(svg) {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── Shadows: remove for clean document feel ── */
+  .shadow-sm, .shadow, .shadow-md, .shadow-lg, .shadow-xl, .shadow-2xl,
+  [class*="shadow"] {
+    box-shadow: none !important;
+  }
+
+  /* ── Rounded cards: keep border, remove extra rounding ── */
+  .rounded-2xl {
+    border-radius: 8px !important;
+  }
+
+  /* ── Star indicators ── */
+  .star-indicator {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color: #f59e0b !important;
+  }
+
+  /* ── Inline Notes  -  yellow cards with exact color ── */
+  .inline-note,
+  [class*="bg-amber-50"][class*="border-amber-200"] {
+    background-color: #fffbeb !important;
+    border: 1px solid #fcd34d !important;
+    border-radius: 8px !important;
+    padding: 10pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── Section Comments  -  hidden in print (interactive only) ── */
+  .section-comments {
+    display: none !important;
+  }
+
+  /* ── Engineering Register cards ── */
+  [class*="bg-slate-50"][class*="border-slate-200"].rounded-xl {
+    background-color: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── Intuition Layer cards ── */
+  [class*="bg-white"][class*="border-slate-200"].rounded-xl {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── Callout boxes  -  preserve border + background ── */
+  [class*="border-cyan-200"][class*="bg-cyan-50"],
+  [class*="border-violet-200"][class*="bg-violet-50"],
+  [class*="border-amber-200"][class*="bg-amber-50"],
+  [class*="border-emerald-200"][class*="bg-emerald-50"],
+  [class*="border-rose-200"][class*="bg-rose-50"],
+  [class*="border-fuchsia-200"][class*="bg-fuchsia-50"] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bg-cyan-50    { background-color: #ecfeff !important; }
+  .bg-violet-50  { background-color: #f5f3ff !important; }
+  .bg-amber-50   { background-color: #fffbeb !important; }
+  .bg-emerald-50 { background-color: #ecfdf5 !important; }
+  .bg-rose-50    { background-color: #fff1f2 !important; }
+  .bg-fuchsia-50 { background-color: #fdf4ff !important; }
+
+  .border-cyan-200    { border-color: #a5f3fc !important; }
+  .border-violet-200  { border-color: #c4b5fd !important; }
+  .border-amber-200   { border-color: #fde68a !important; }
+  .border-emerald-200 { border-color: #a7f3d0 !important; }
+  .border-rose-200    { border-color: #fecdd3 !important; }
+  .border-fuchsia-200 { border-color: #f0abfc !important; }
+
+  /* ── MetricBadge  -  preserve colors ── */
+  [class*="rounded-full"][class*="border"][class*="font-mono"][class*="font-bold"] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bg-cyan-50.text-cyan-700       { background-color: #ecfeff !important; color: #0e7490 !important; }
+  .bg-violet-50.text-violet-700   { background-color: #f5f3ff !important; color: #6d28d9 !important; }
+  .bg-fuchsia-50.text-fuchsia-700 { background-color: #fdf4ff !important; color: #a21caf !important; }
+  .bg-emerald-50.text-emerald-700 { background-color: #ecfdf5 !important; color: #047857 !important; }
+  .bg-amber-50.text-amber-700     { background-color: #fffbeb !important; color: #b45309 !important; }
+  .bg-rose-50.text-rose-700       { background-color: #fff1f2 !important; color: #be123c !important; }
+
+  /* ── Links: print URL after them ── */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #64748b;
+    font-weight: normal;
+    word-break: break-all;
+  }
+
+  /* Don't show URL for internal anchor links or empty hrefs */
+  a[href^="#"]:after,
+  a[href=""]:after,
+  a[href^="javascript"]:after {
+    content: "" !important;
+  }
+
+  /* ── Tables ── */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    font-size: 9pt !important;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  th, td {
+    border: 0.5pt solid #e2e8f0 !important;
+    padding: 4pt 6pt !important;
+  }
+
+  /* ── Glossary section ── */
+  .glossary-section {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .break-inside-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── Hero card / top-level white cards ── */
+  .bg-white.border.rounded-2xl {
+    border: 1px solid #e2e8f0 !important;
+    background: white !important;
+  }
+
+  /* ── Backdrop blur elements  -  flatten for print ── */
+  [class*="backdrop-blur"],
+  [class*="bg-white\\/"] {
+    background: white !important;
+    backdrop-filter: none !important;
+  }
+
+  /* ── Annotation overlay  -  always hidden ── */
+  [class*="fixed"][class*="inset-0"][class*="bg-violet"] {
+    display: none !important;
+  }
+
+  /* ── Lists ── */
+  ul, ol {
+    page-break-inside: auto;
+  }
+
+  li {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── Code / mono blocks ── */
+  code, pre, .font-mono {
+    font-size: 9pt !important;
+  }
+
+  code {
+    background-color: #f1f5f9 !important;
+    padding: 1pt 3pt !important;
+    border-radius: 3px !important;
+    border: 0.5pt solid #e2e8f0 !important;
+  }
+
+  pre, .whitespace-pre-wrap {
+    background-color: #f8fafc !important;
+    border: 0.5pt solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    padding: 8pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── Overflow: make clipped content visible for print ── */
+  .overflow-x-auto,
+  .overflow-hidden {
+    overflow: visible !important;
+  }
+
+  /* ── Glossary tooltips  -  hide floating popups ── */
+  .fixed.z-\[210\],
+  [class*="fixed"][class*="z-\[210\]"] {
+    display: none !important;
+  }
+
+  /* ── Glossary term decorations  -  remove in print (full glossary at end) ── */
+  .glossary-term {
+    border-bottom: none !important;
+    cursor: default !important;
+  }
+
+  .glossary-term > sup {
+    display: none !important;
+  }
+
+  [data-glossary-term] {
+    border-bottom: none !important;
+    cursor: default !important;
+  }
+
+  [data-glossary-term] > sup {
+    display: none !important;
+  }
+
+  /* ── MetricBadge  -  preserve slate background ── */
+  .bg-slate-100 {
+    background-color: #f1f5f9 !important;
+  }
+
+  /* ── Section numbers  -  preserve cyan background ── */
+  .bg-cyan-500\/10 {
+    background-color: #ecfeff !important;
+  }
+
+  /* ── Annotations  -  highlights and underlines print with color ── */
+  mark.annotation-highlight,
+  .annotation-highlight {
+    background-color: #fef08a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Pink annotation highlight  -  preserve inline background-color */
+  [data-annotation-color="#fbcfe8"],
+  mark.annotation-highlight[style*="fbcfe8"],
+  .annotation-highlight[style*="fbcfe8"] {
+    background-color: #fbcfe8 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Ensure ALL annotation inline colors are preserved in print */
+  [data-annotation-type] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .annotation-underline {
+    border-bottom: 2px solid #3b82f6 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* ── Transitions: disable all ── */
+  *, *::before, *::after {
+    transition: none !important;
+  }
+
+  /* -- Hide stars and interactive block icons in print -- */
+  .group\/iblock .no-print,
+  [class*="group/iblock"] .no-print {
+    display: none !important;
+  }
+
+  /* -- Hide block-level comments in print (interactive only) -- */
+  .section-comments,
+  [class*="SectionComments"] {
+    display: none !important;
+  }
+
+  /* -- Preserve inline notes (yellow cards) in print -- */
+  .inline-note {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* -- Compress spacing for print efficiency -- */
+  .mb-10 { margin-bottom: 16pt !important; }
+  .mb-8 { margin-bottom: 12pt !important; }
+  .mb-6 { margin-bottom: 10pt !important; }
+  .mb-4 { margin-bottom: 8pt !important; }
+  .mt-20 { margin-top: 20pt !important; }
+  .py-4 { padding-top: 6pt !important; padding-bottom: 6pt !important; }
+  .p-8 { padding: 10pt !important; }
+  .p-5 { padding: 8pt !important; }
+  .gap-6 { gap: 8pt !important; }
+  .gap-3 { gap: 4pt !important; }
+
+  /* -- Tighter line height for print -- */
+  .leading-relaxed { line-height: 1.4 !important; }
+  .leading-snug { line-height: 1.3 !important; }
+
+  /* -- Hide the action/knowledge color coding borders in print -- */
+  section[id].border-l-2 {
+    border-left: none !important;
+    padding-left: 0 !important;
+  }
+
+  /* -- Prevent page break inside diagram cards -- */
+  .rounded-2xl,
+  .rounded-xl {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Annotation Styles  -  Highlights & Underlines
+   ═══════════════════════════════════════════════════════ */
+
+/* Yellow highlight */
+mark.annotation-highlight,
+.annotation-highlight {
+  background-color: #fef08a;
+  border-radius: 2px;
+  padding: 0 1px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Blue underline */
+.annotation-underline {
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 1px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Floating toolbar entrance */
+@keyframes annotation-pop-in {
+  from { opacity: 0; transform: translateY(4px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-in {
+  animation: annotation-pop-in 0.15s ease-out;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Scroll-triggered animation (screen only)
+   ═══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   Anchor scroll offset  -  clears the sticky TopBar
+   ═══════════════════════════════════════════════════════ */
+section[id] {
+  scroll-margin-top: 64px;
+}
+
+.scroll-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Commentary Thread  -  slide in from right
+   ═══════════════════════════════════════════════════════ */
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.2s ease-out;
+}
