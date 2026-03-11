@@ -70,7 +70,7 @@ export function InteractiveBlockProvider({ children, hideInlineOnPage = false })
     setBlockComments(prev => ({
       ...prev,
       [blockId]: [...(prev[blockId] || []), {
-        id: Date.now(), blockId, author: 'Waqas', text,
+        id: Date.now(), blockId, author: 'Reader', text,
         status: 'open', timestamp: new Date().toLocaleString(), replies: [],
       }]
     }))
@@ -94,7 +94,7 @@ export function InteractiveBlockProvider({ children, hideInlineOnPage = false })
         next[key] = arr.map(c => c.id === commentId ? {
           ...c,
           replies: [...(c.replies || []), {
-            id: Date.now(), author: 'Waqas', text,
+            id: Date.now(), author: 'Reader', text,
             timestamp: new Date().toLocaleString(),
           }]
         } : c)

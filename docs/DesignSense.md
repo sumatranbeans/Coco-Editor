@@ -96,6 +96,95 @@ Two types of content exist in most documents: things to DO (actions, project wor
 
 Text content and visual content (diagrams, charts, flows) should be approximately 50/50. For a visual learner, diagrams teach faster than paragraphs. Every concept that can be diagrammed SHOULD be diagrammed. The more visuals, the better. **Per-subsection mandate:** Every subsection with 3+ paragraphs of text must include at least one visual element (diagram, table, or illustration). No exceptions.
 
+### Story-First Workflow
+
+Documents must be built narrative-first, not content-first. The workflow is:
+
+1. **Narrative architecture** - Define the story structure, emotional arc, and section flow before any technical content is written
+2. **Content filling** - Domain experts fill the narrative structure with substance, guided by the story framework
+3. **Visual rendering** - Design and build the interactive document from the narrative + content
+
+Building content-first (dumping technical material, then layering narrative on top) produces technically accurate but narratively incoherent documents. Inverting the flow ensures the narrative structure exists before content is inserted. Content serves the story rather than the story being retrofitted around content.
+
+**Implementation:**
+- Before writing any section, define: What is the reader's emotional state entering? What should it be exiting?
+- Section ordering follows the narrative arc, not encyclopedia ordering or codebase structure
+- Every section has a narrative purpose beyond "present information" - it must move the reader somewhere
+
+### Three-Act Progressive Disclosure
+
+For substantial documents (10+ sections), organize content into three progressive layers of depth. Each layer is self-contained and satisfies a different audience:
+
+**Act 1 - Vision (Why it matters)**
+- Zero technical details, zero jargon, zero specifications
+- Pure aspiration: what does success look like? What changes when this works?
+- Emotional register: inspiration, excitement, conviction
+- A non-technical reader stops here and walks away convinced this matters
+
+**Act 2 - Conceptual (How it works)**
+- Concepts and mental models, no raw numbers or implementation details
+- Analogies, metaphors, and "imagine this" framing
+- Numbers only when contextualized ("about thirty times per second," not "33.3 fps")
+- A product manager stops here and can explain the system to stakeholders
+
+**Act 3 - Technical (How to build it)**
+- Full specifications, architecture, implementation details
+- Pre-read education cards before every concept that requires background knowledge
+- Engineering register + intuition layer on every technical section
+- An engineer stops here and can execute
+
+**Transitions between acts** are explicit. Each transition recaps what was established and previews what comes next. The reader should never feel dropped into a new register without warning.
+
+### Pre-Read Education Cards
+
+When a document introduces a concept that requires background knowledge, a Pre-Read card must appear BEFORE the content that uses it. Pre-reads prepare the reader - they are orientation, not appendix.
+
+**Rules:**
+- **Collapsed by default** - comprehensive in depth, but hidden until the reader needs them
+- **Long, not short** - a Pre-Read should fully educate a newcomer on the concept. 3-5 paragraphs minimum. If a reader expands it, they should walk away understanding the concept completely
+- **Placement is critical** - a Pre-Read AFTER the explanation it supports is useless. It becomes a footnote instead of preparation. Always before, never after
+- **Skip-safe** - if a reader already knows the concept, they skip the collapsed card and lose nothing. If they don't know it, they expand and learn. This is the power of collapsed-by-default
+
+### Experience Architecture
+
+Beyond information architecture (where content lives), design the reader's emotional experience:
+
+**Emotional targets per section:**
+- Define what the reader should FEEL at each point, not just what they should know
+- "Intrigued" at the opening, "convinced" by the middle, "empowered" at the close
+
+**Aha moments:**
+- Design 3-5 emotional peaks across the document where a concept clicks
+- Place them at narrative climax points, not randomly
+- Use sparingly - too many dilutes their impact
+
+**Voice direction:**
+- Each section or act can have a distinct voice register (inspiring, teaching, precise)
+- Voice transitions should be deliberate, not accidental
+- The opening act might use a storyteller's voice; the closing act might use an engineer's voice
+
+**The distinction:** A document can have perfect information architecture (every fact in the right place) and still fail because the reader doesn't feel pulled forward, doesn't feel mastery building. Experience architecture designs the peaks, flow, and emotional progression that turn information into understanding.
+
+### The Greatness Standard
+
+"Good enough" is the enemy of great documents. Every element must be self-challenged:
+
+- **Content:** "Is this the best possible explanation, or just an adequate one?"
+- **Visuals:** "Does this diagram teach in seconds, or does it require study?"
+- **Flow:** "Does the reader feel pulled forward, or are they pushing through?"
+- **Polish:** "If I showed this to someone I respect, would I be proud?"
+
+Self-challenge is mandatory at every level - section, subsection, card, diagram. The question is never "does this work?" but "is this the absolute best version this could be?"
+
+### Visual QA Is a Distinct Dimension
+
+Content accuracy does not imply visual correctness. These are orthogonal quality dimensions:
+
+- **Content QA** checks: Are the facts right? Are the numbers verified? Is the narrative coherent?
+- **Visual QA** checks: Do the colors render? Are diagrams actually visible? Does the layout match the design system? Is the typography consistent?
+
+Passing content QA and failing visual QA produces a document that reads correctly in code but looks broken in the browser. Both checks are mandatory. A design specialist must perform visual QA independently of content review.
+
 ---
 
 ## What You Produce
@@ -533,15 +622,15 @@ Comments are anchored to specific sections - like Google Docs commenting but at 
 {
   id: Date.now(),
   sectionId: 'part-2',          // Which section this comment is on
-  author: 'Waqas',             // Or agent name: 'Payne', 'Silicon Lead', etc.
-  text: 'The latency numbers here seem optimistic...',
+  author: 'Reader',             // Or agent name: 'Domain Expert', 'Reviewer', etc.
+  text: 'The numbers here seem optimistic...',
   status: 'open',              // 'open' | 'resolved'
   timestamp: '2026-03-09 14:32',
   replies: [
     {
       id: Date.now(),
-      author: 'Silicon Lead',
-      text: 'Updated with verified Jetson benchmarks from Sprint 42.',
+      author: 'Domain Expert',
+      text: 'Updated with verified benchmarks.',
       timestamp: '2026-03-09 15:10',
     }
   ]
@@ -815,26 +904,26 @@ useEffect(() => {
   "commentary": [
     {
       "id": 1710000000000,
-      "author": "Waqas",
-      "text": "The latency numbers here seem optimistic...",
+      "author": "Reader",
+      "text": "The numbers here seem optimistic...",
       "status": "open",
       "timestamp": "2026-03-09 14:32",
       "replies": [
         {
           "id": 1710000060000,
-          "author": "Silicon Lead",
-          "text": "Updated with verified Jetson benchmarks from Sprint 42.",
+          "author": "Domain Expert",
+          "text": "Updated with verified benchmarks.",
           "timestamp": "2026-03-09 15:10"
         }
       ]
     }
   ],
   "blockComments": {
-    "part-2-camera": [
+    "part-2-intro": [
       {
         "id": 1710000120000,
-        "author": "Waqas",
-        "text": "Can we get higher resolution?",
+        "author": "Reader",
+        "text": "Can we expand on this point?",
         "status": "open",
         "timestamp": "2026-03-09 16:00",
         "replies": []
@@ -853,7 +942,7 @@ When the user adds a note at a section, a yellow sticky-note card appears BELOW 
 {
   id: Date.now(),
   sectionId: 'part-2',
-  text: '<b>Remember:</b> The PLE config is mandatory on 8GB...',  // Rich text (HTML)
+  text: '<b>Remember:</b> Check the config before deploying...',  // Rich text (HTML)
   timestamp: '2026-03-09 14:45',
   color: 'amber',  // Always amber/yellow for sticky notes
 }
@@ -904,21 +993,21 @@ Technical terms are auto-detected throughout the document. Each occurrence gets 
 **Glossary data structure (`src/data/glossary.js`):**
 ```js
 export const glossary = {
-  'MatFormer': {
-    technical: 'A neural network architecture where smaller sub-models are nested within larger ones, sharing weight matrices across the first N layers. Enables self-speculative decoding.',
-    plain: 'A "Russian doll" design where a smaller AI model lives inside a bigger one. They share the same brain cells for their common layers, so you only need to store one set of weights.',
+  'API': {
+    technical: 'Application Programming Interface - a defined set of protocols and tools for building software. APIs specify how software components should interact.',
+    plain: 'A waiter in a restaurant. You tell the waiter what you want (request), the kitchen makes it (server), and the waiter brings it back (response).',
   },
-  'PLE': {
-    technical: 'Parameter-Level Eviction - a memory management technique that caches inactive model layers on NVMe SSD, transferring them to GPU VRAM only when needed for computation.',
-    plain: 'Like virtual memory for AI. When the GPU runs out of room, it temporarily stores unused model parts on the SSD and brings them back when needed.',
+  'Component': {
+    technical: 'A self-contained, reusable piece of UI that manages its own state and rendering. In React, components are functions that return JSX.',
+    plain: 'A LEGO brick. Each component does one thing well. You snap them together to build complex interfaces.',
   },
-  'GGUF': {
-    technical: 'GPT-Generated Unified Format - a binary format for quantized LLM weights used by llama.cpp and Ollama. Supports various quantization levels (Q2-Q8).',
-    plain: 'A compressed file format for AI models. Think of it like how MP3 compresses music - GGUF compresses AI model weights to fit on smaller devices.',
+  'Tailwind CSS': {
+    technical: 'A utility-first CSS framework providing low-level utility classes directly in markup, enabling rapid UI development without custom CSS files.',
+    plain: 'Instead of naming custom styles in a separate file, you describe how things look right where they are - like putting sticky labels on items.',
   },
-  'VRAM': {
-    technical: 'Video Random Access Memory - dedicated GPU memory used for storing model weights, KV cache, and intermediate activations during inference.',
-    plain: 'The GPU\'s working memory. Like RAM but specifically for the graphics card. AI models need to fit in VRAM to run on the GPU.',
+  'localStorage': {
+    technical: 'A web storage API allowing JavaScript to store key-value pairs persistently in the browser. Data survives page refreshes with a typical 5-10MB limit.',
+    plain: 'A notebook that lives in your browser. Notes stay there even if you close the browser and come back later.',
   },
   // ... extend with all domain terms
 }
@@ -1874,3 +1963,203 @@ Print is a separate product with its own design pass:
 - All sections start expanded (content-first, not chrome-first)
 - localStorage keys use `coco-editor-` prefix (configurable per project)
 - Comment sync imports agent responses before starting auto-export timer
+
+---
+
+## Advanced Standards - Tailwind Safety, Color Enforcement, Diagram Standards
+
+> These standards address the most dangerous class of bugs: builds that pass clean while the UI renders broken at runtime. They supplement the Scaligraph and Quality Checklist sections above.
+
+### Tailwind CSS Safety Rules (Critical - Build Will Look Correct But Render Broken)
+
+**Rule 1: Dynamic class interpolation is BROKEN.**
+Template literals like `` bg-${color}-500 `` or `` text-${stage}-700 `` get purged by Tailwind JIT because the scanner never sees the full class string in source code.
+
+```jsx
+// BROKEN - purged at build time, renders as no background
+const bg = `bg-${color}-500`;
+
+// CORRECT - explicit colorMap with full class strings
+const colorMap = {
+  emerald: 'bg-emerald-500',
+  amber: 'bg-amber-500',
+  cyan: 'bg-cyan-500',
+  violet: 'bg-violet-500',
+  slate: 'bg-slate-500',
+};
+const bg = colorMap[color];
+```
+
+**Rule 2: `.replace()` on class strings is equally broken.**
+Generating Tailwind classes at runtime via string manipulation (e.g., `c.fill.replace('fill', 'bg')`) produces classes invisible to the scanner.
+
+```jsx
+// BROKEN - scanner never sees 'bg-cyan-500'
+const bgClass = config.fill.replace('fill', 'bg');
+
+// CORRECT - add explicit bg key to the data object
+const config = {
+  fill: 'fill-cyan-500',
+  bg: 'bg-cyan-500',    // explicit, scanner-visible
+  text: 'text-cyan-600',
+};
+```
+
+**Rule 3: Non-standard Tailwind values do not exist.**
+`ml-13`, `w-4.5`, and similar are not in Tailwind's default spacing scale.
+
+```jsx
+// BROKEN - ml-13 is not a default Tailwind value
+<div className="ml-13">
+
+// CORRECT options:
+<div className="ml-[3.25rem]">   // arbitrary value
+<div className="ml-12">          // nearest standard value
+```
+
+**Rule 4: SVG attribute validity.**
+`strokeDasharray="none"` is not a valid SVG attribute value.
+
+```jsx
+// BROKEN
+<line strokeDasharray="none" />
+
+// CORRECT - omit the attribute entirely
+<line strokeDasharray={isActive ? undefined : '4 4'} />
+```
+
+**Implementation checklist:**
+- [ ] Every diagram component uses a `colorMap` object with full class strings
+- [ ] Zero template literal class construction (`bg-${x}-500` patterns)
+- [ ] Zero `.replace()` on Tailwind class strings
+- [ ] All spacing values are standard Tailwind scale or `[arbitrary]` syntax
+- [ ] All SVG attributes use valid values (no `"none"` for strokeDasharray)
+- [ ] `colorMap` pattern is mandatory for ANY data-driven diagram - no exceptions
+
+### Project Color Palette (Enforced)
+
+Every project should define a color palette with 5-7 semantic colors. Each color maps to a meaning that stays consistent across ALL diagrams and cards in the document.
+
+**How to define your palette:**
+
+| Step | Action |
+|------|--------|
+| 1 | Choose 5-7 Tailwind colors for your project |
+| 2 | Assign each to a semantic meaning (e.g., "primary concept," "supporting detail," "warning," "success") |
+| 3 | Document the mapping in a table |
+| 4 | Enforce: no off-palette colors anywhere |
+
+**Example palette (customize for your project):**
+
+| Color | Usage |
+|-------|-------|
+| `cyan` | Primary concepts, main sections |
+| `violet` | AI/computational elements |
+| `emerald` | Project planning, forward-looking |
+| `amber` | Insights, warnings, notes |
+| `slate` | Narrative, neutral/chrome |
+| `rose` | Emotional peaks, critical highlights |
+
+**Off-palette enforcement:**
+- Pick your palette, then ENFORCE it. No exceptions.
+- If a color is not in the palette, do not use it. Find the closest semantic match.
+- The same concept MUST use the same color across ALL diagrams. No per-diagram color drift.
+
+### Card Taxonomy (Template)
+
+For documents using progressive disclosure, define 4-6 card types with distinct visual identities:
+
+**How to define your card types:**
+
+| Step | Action |
+|------|--------|
+| 1 | Identify 4-6 content categories in your document |
+| 2 | Assign each a color from your palette |
+| 3 | Define the purpose and key rule for each |
+| 4 | Build React components with consistent styling |
+
+**Example card taxonomy (customize for your project):**
+
+| Card Type | Color | Purpose | Key Rule |
+|-----------|-------|---------|----------|
+| Narrative | slate | Story prose, section openings | Sets emotional context |
+| Pre-Read | indigo (collapsed) | Background knowledge BEFORE concepts are used | MUST appear before the content it prepares for, never after |
+| Technical | cyan | Specs, measurements, architecture | Verified facts only |
+| Insight | amber | Transferable learnings, connections | Connects project to reader's domain |
+| Project | emerald | Roadmap, phases, next steps | Forward-looking |
+| Highlight | rose | Emotional peaks, paradigm shifts | Sparingly used at narrative climaxes |
+
+**Pre-Read placement rule:** Pre-reads prepare the reader. They MUST appear before the narrative that uses their concepts. A Pre-Read after the explanation it supports is useless - it becomes a footnote instead of preparation.
+
+### Diagram Design Standards (Supplements Scaligraph Rules)
+
+**Minimum readability:**
+- Minimum font size: `text-[8px]`. The value `text-[7px]` is below the readability threshold and is forbidden.
+
+**z-index discipline:**
+- `z-10` is REQUIRED on all `relative` content positioned over `absolute` dotted background patterns. Without it, text renders behind the dot grid.
+
+**Mandatory diagram anatomy (every diagram must have ALL of these):**
+1. Dotted background pattern (`radial-gradient`, `opacity-[0.10]`)
+2. White card container (`bg-white`)
+3. `rounded-2xl` border with `border-slate-200`
+4. `shadow-xl` depth
+5. Padding: `p-8 md:p-10`
+6. Header with title + stats/metrics
+7. Key insight callout at bottom of diagram
+
+**Mobile responsiveness (mandatory):**
+- All grids must collapse: `grid-cols-1 md:grid-cols-2` (or appropriate breakpoint)
+- Arrows must have mobile variants: vertical on mobile (`flex-col`), horizontal on desktop (`flex-row`)
+- Test at 375px width minimum
+
+### Narrative Architecture (Document-Level)
+
+For multi-act documents, these story-structure rules apply:
+
+**Three-act emotional arc:**
+- Act 1 inspires (emotional peak: the success scenario)
+- Act 2 builds understanding (emotional peak: the core challenge)
+- Act 3 delivers mastery (emotional peaks: key revelations and insights)
+
+**Diagram-first for visual learners:**
+- Show the diagram BEFORE the prose explanation, not after
+- The visual creates the mental model; the text refines it
+
+**Pre-reads before usage:**
+- Pre-read cards must appear before the narrative that uses their concepts
+- Never place a Pre-read after the content it was supposed to prepare for
+
+**No diagram deserts:**
+- Every section needs at least one visual element
+- This supplements the existing 50/50 ratio rule - no section is exempt
+
+**Callbacks to emotional peaks:**
+- Later sections should reference earlier emotional moments to maintain connection
+- "Remember the scenario from the opening? Here is how we make it real."
+
+### Quality Assurance Process (Mandatory Before Delivery)
+
+This four-step QA process is MANDATORY before any deliverable is presented:
+
+**Step 1: Visual Inspection**
+- [ ] Check every diagram for Tailwind purge issues (missing colors = purged dynamic classes)
+- [ ] Verify minimum font sizes (no `text-[7px]` or smaller)
+- [ ] Confirm `z-10` on all relative content over absolute backgrounds
+- [ ] Validate SVG attributes (no `strokeDasharray="none"`)
+- [ ] Test mobile responsiveness (375px minimum)
+
+**Step 2: Content Review**
+- [ ] Domain experts verify every diagram's factual accuracy
+- [ ] Communication architect verifies narrative flow, Pre-read placement, emotional arc
+- [ ] Design specialist verifies visual consistency, color palette compliance, card taxonomy
+
+**Step 3: Re-inspection**
+- [ ] All modified files get a final visual check after Step 2 fixes
+- [ ] Color palette compliance: zero off-palette colors
+- [ ] Concept colors consistent across all diagrams
+
+**Step 4: Build verification**
+- [ ] `npx vite build` must pass clean (0 errors)
+- [ ] Visual spot-check of built output in browser
+- [ ] Review by all stakeholders mandatory before presentation

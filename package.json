@@ -1,7 +1,7 @@
 {
   "name": "coco-editor",
   "private": true,
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Rich interactive document renderer - drop in any markdown, get a full interactive experience",
   "type": "module",
   "scripts": {

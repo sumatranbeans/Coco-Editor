@@ -4,7 +4,7 @@
 
 You have a complex document. Maybe it's a technical guide, a research paper, a project plan, an art portfolio write-up, or a 200-page spec. Right now it's a wall of text in markdown. You want it to feel like a professionally published interactive book — with the ability to annotate, comment, bookmark, look up terms, and print a clean PDF.
 
-Coco Editor does that. You give it your markdown and a Claude instance. You get back a locally-running web page with professional tooling built in — no design skills required, no cloud services, no deployment.
+Coco Editor does that. You give it your markdown and a Claude instance. You get back a locally-running web page with professional tooling built in — no design skills required, no cloud services, no deployment. Two built-in personas — Storee (communication architect) and Clippy (design specialist) — ensure your document has the right narrative structure AND the right visual execution.
 
 ---
 
@@ -43,9 +43,9 @@ Only two things change per project:
 - **`src/App.jsx`** — your content, structured into interactive sections
 - **`src/data/glossary.js`** — your project's technical terms
 
-Claude does the conversion. You give it your markdown file and the prompt from [START-HERE.md](START-HERE.md). Claude reads the design system spec (1,876 lines of battle-tested rules), adopts the Creative Director persona, and generates your interactive document following every typography, layout, and interaction rule automatically.
+Claude does the conversion. You give it your markdown file and the prompt from [START-HERE.md](START-HERE.md). Claude reads the design system spec, adopts the Storee (communication architect) and Clippy (design specialist) personas, and generates your interactive document following every typography, layout, narrative, and interaction rule automatically.
 
-The design system tells Claude: use the Pyramid Rule (big picture first, then zoom in), add Engineering Registers and Intuition Layers to technical sections, create animated diagrams with Tailwind + SVG, ensure every block is interactive, and make it print like a book.
+The design system tells Claude: use the Story-First Workflow (narrative architecture before content), follow the Pyramid Rule (big picture first, then zoom in), apply Three-Act Progressive Disclosure (vision, conceptual, technical), add Engineering Registers and Intuition Layers to technical sections, create animated diagrams with Tailwind + SVG, ensure every block is interactive, and make it print like a book. Storee ensures the narrative lands; Clippy ensures the visuals communicate.
 
 ---
 
@@ -64,7 +64,7 @@ Hit "Export PDF" and get a print-quality document. Compressed margins, professio
 The dual-register pattern (technical specs + plain English on every section) means the same document works for both expert and newcomer audiences. One document, two levels of depth.
 
 ### As a Reusable Framework
-The design system (`docs/DesignSense.md`) and the Creative Director persona (`docs/Creative.md`) are portable. Take them to your next project. Every project benefits from the same quality standards without re-learning them.
+The design system (`docs/DesignSense.md`) and the two personas — Storee (`docs/Storee.md`) for narrative architecture and Clippy (`docs/Clippy.md`) for visual design — are portable. Take them to your next project. Every project benefits from the same quality standards without re-learning them.
 
 ---
 
@@ -85,16 +85,17 @@ See **[START-HERE.md](START-HERE.md)** for the full guide, including the exact p
 ## How It Works
 
 ```
-Your Markdown  -->  Claude + DesignSense + Creative  -->  Interactive Web Page
-                         (reads your doc,                  (all tooling works
-                          follows the spec,                 out of the box)
+Your Markdown  -->  Claude + DesignSense + Storee + Clippy  -->  Interactive Web Page
+                         (reads your doc,                         (all tooling works
+                          follows the spec,                        out of the box)
                           generates App.jsx)
 ```
 
 1. Drop your markdown into the project folder
 2. Give Claude the prompt from [START-HERE.md](START-HERE.md)
-3. Claude converts your content into React components using the framework
-4. Open localhost:5173 — your interactive document is live
+3. Claude reads the DesignSense spec + Storee (narrative) + Clippy (design) personas
+4. Claude converts your content into React components using the framework
+5. Open localhost:5173 — your interactive document is live
 
 ---
 
@@ -127,8 +128,9 @@ After your page is built, this is where the real value kicks in:
 Coco-Editor/
   START-HERE.md               # Getting started + copy-paste prompt for Claude
   docs/
-    DesignSense.md            # Design system spec (1,876 lines)
-    Creative.md               # Creative Director persona
+    DesignSense.md            # Design system spec (comprehensive)
+    Storee.md                 # Communication architect persona
+    Clippy.md                 # Design specialist persona
   src/
     App.jsx                   # Your content (the only file you change)
     data/glossary.js          # Your glossary terms
@@ -136,7 +138,7 @@ Coco-Editor/
     hooks/                    # Commentary state management
     utils/                    # Bidirectional comment sync engine
     index.css                 # Typography + print styles + animations
-  CHANGELOG.md                # Design evolution across 6 sessions
+  CHANGELOG.md                # Design evolution log
 ```
 
 ---
@@ -145,12 +147,15 @@ Coco-Editor/
 
 Full spec in `docs/DesignSense.md`. The essentials:
 
-1. **Documents, not websites** — feels like reading a book, not browsing a page
-2. **Pyramid Rule** — big picture first, then zoom in
-3. **Dual-register** — technical specs + plain English on every section
-4. **50/50 visual ratio** — if it can be a diagram, it should be
-5. **Universal interactivity** — every block supports star, note, comment
-6. **Print is a separate product** — its own design pass, its own quality bar
+1. **Story-first workflow** — narrative architecture before content, content before rendering
+2. **Three-act progressive disclosure** — vision, conceptual, technical - each layer self-contained
+3. **Pyramid Rule** — big picture first, then zoom in
+4. **Dual-register** — technical specs + plain English on every section
+5. **50/50 visual ratio** — if it can be a diagram, it should be
+6. **Experience architecture** — design what the reader feels, not just what they learn
+7. **Universal interactivity** — every block supports star, note, comment
+8. **The greatness standard** — "good enough" is the enemy of great documents
+9. **Print is a separate product** — its own design pass, its own quality bar
 
 ---
 
@@ -164,8 +169,8 @@ Full spec in `docs/DesignSense.md`. The essentials:
 
 ## Origin
 
-Extracted from the [Coco Loco](https://github.com/sumatranbeans/Coco-Loco) project after 6 sessions of iterative development with 108 rounds of direct user feedback. Every rule in the design system was earned, not assumed. The framework, the spec, and the persona are the distilled result.
+Battle-tested across 12 sessions of iterative development with hundreds of rounds of direct user feedback. Every rule in the design system was earned, not assumed. The framework, the spec, and the personas are the distilled result.
 
 ---
 
-**v2.2** · [Get Started](START-HERE.md) · [Design System](docs/DesignSense.md) · [Changelog](CHANGELOG.md)
+**v3.0** · [Get Started](START-HERE.md) · [Design System](docs/DesignSense.md) · [Storee](docs/Storee.md) · [Clippy](docs/Clippy.md) · [Changelog](CHANGELOG.md)

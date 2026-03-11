@@ -30,9 +30,10 @@ You'll see a demo page. That's the framework working. Now you replace the demo w
 
 1. You drop your markdown file into the project folder
 2. You give Claude the prompt below
-3. Claude reads your markdown + the design system (`docs/DesignSense.md`) + the persona (`docs/Creative.md`)
-4. Claude converts your markdown into React components using the framework
-5. You get a live interactive page at localhost:5173
+3. Claude reads your markdown + the design system (`docs/DesignSense.md`) + Storee (`docs/Storee.md`) + Clippy (`docs/Clippy.md`)
+4. Storee architects the narrative structure; Clippy handles the visual design
+5. Claude converts your markdown into React components using the framework
+6. You get a live interactive page at localhost:5173
 
 ## The Prompt
 
@@ -45,17 +46,30 @@ I have a markdown document at YOUR-FILE.md that I want to convert into a rich in
 
 Before you start:
 1. Read docs/DesignSense.md — this is the design system specification. Follow it exactly.
-2. Read docs/Creative.md — this is the Creative Director persona. Adopt this lens for all design decisions.
-3. Read src/App.jsx — this is the example. You'll replace this with my content.
-4. Read my markdown file: YOUR-FILE.md
+2. Read docs/Storee.md — this is the communication architect persona. Use this lens for narrative structure, section flow, and audience-first framing.
+3. Read docs/Clippy.md — this is the design specialist persona. Use this lens for visual design, layout, and coherence decisions.
+4. Read src/App.jsx — this is the example. You'll replace this with my content.
+5. Read my markdown file: YOUR-FILE.md
 
-Then convert my document:
-- Break it into logical sections (each becomes a ScrollSection)
+Then convert my document using the Story-First Workflow:
+Step 1 — Narrative architecture (Storee's lens):
+- Define the three-act structure: Vision (why it matters), Conceptual (how it works), Technical (how to build it)
+- Design the emotional arc: what should the reader feel at each section?
+- Identify 3-5 aha moments — emotional peaks where concepts click
+- Place pre-read education cards before any concept that requires background knowledge
+
+Step 2 — Content conversion:
+- Break the markdown into logical sections (each becomes a ScrollSection)
 - Wrap EVERY content block in InteractiveBlock (paragraphs, lists, tables, quotes — everything)
 - Add Engineering Register (technical specs) and Intuition Layer (plain English analogy) to technical sections
 - Create Scaligraph diagrams (Tailwind + inline SVG, no images) for concepts that benefit from visuals
 - Populate src/data/glossary.js with technical terms from my document
 - Follow the Pyramid Rule: big picture first, then zoom into details
+
+Step 3 — Visual design (Clippy's lens):
+- Apply the project's card taxonomy with distinct visual categories
+- Ensure consistent color palette across all diagrams
+- Verify every diagram communicates its concept in seconds, not minutes
 - Update the TopBar title and version to match my project
 
 Design rules (non-negotiable):
@@ -65,6 +79,7 @@ Design rules (non-negotiable):
 - Documents should feel like books, not websites
 - Every content block must have star/note/comment capability
 - Print output must look like a professional publication
+- The greatness standard: not "does this work?" but "is this the best version?"
 
 When done, run: npm run build && npm run lint
 Fix any errors. Then tell me it's ready to review at localhost:5173.
@@ -86,10 +101,14 @@ Fix any errors. Then tell me it's ready to review at localhost:5173.
 
 ## Tips
 
+- **Story first**: Define the narrative arc before writing any content. What should the reader feel at each point?
+- **Three acts**: Vision (no jargon), Conceptual (mental models), Technical (full specs). Each act is self-contained
+- **Pre-reads**: Before any concept that needs background knowledge, add a collapsed Pre-Read card
 - **Long documents**: Break into 10-15 sections max for sidebar readability
 - **Glossary**: Aim for every technical term a newcomer wouldn't know
 - **Diagrams**: Target 50/50 text-to-visual ratio — every concept that can be a visual should be
 - **Sections**: Use the dual-register pattern — Engineering Register for specs, Intuition Layer for "explain it to me like I'm new"
+- **Greatness check**: Ask yourself "would I be proud to show this?" — not just "does this work?"
 - **After first build**: Leave comments on the page, then ask Claude to "read comments-export.json and address every comment"
 
 ## File You'll Edit

@@ -17,7 +17,7 @@ function formatTimestamp(isoString) {
 }
 
 function AuthorBadge({ author }) {
-  const isUser = author === 'Waqas'
+  const isUser = author === 'Reader'
   return (
     <span
       className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-mono font-bold ${

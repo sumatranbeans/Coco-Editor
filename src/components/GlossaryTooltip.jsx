@@ -3,7 +3,7 @@ import { glossary } from '../data/glossary'
 
 /* ────────────────────────────────────────────
    Sorted terms  -  longest first to prevent
-   partial matches (e.g. "E2B" inside "E2B on Jetson")
+   partial matches (e.g. "API" inside "APIKey")
    ──────────────────────────────────────────── */
 const sortedTerms = Object.keys(glossary).sort((a, b) => b.length - a.length)
 
@@ -16,7 +16,7 @@ function buildTermRegex(terms) {
     t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   )
   // Word boundaries prevent false matches inside longer words
-  // e.g. "PLE" inside "samPLEd", "E2B" inside "RE2BUILD", "INT4" inside "PRINT4"
+  // e.g. "API" inside "CAPItal", "CSS" inside "aCCeSs", "DOM" inside "kingDOM"
   return new RegExp(`\\b(?:${escaped.join('|')})\\b`, 'g')
 }
 

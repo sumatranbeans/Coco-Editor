@@ -2,9 +2,71 @@
 
 What was learned and changed across iterations of building the rich interactive document system.
 
+## v3.0.0 - Story-First Architecture (2026-03-11)
+
+Major evolution: two personas, story-first workflow, experience architecture, and the greatness standard.
+
+### New: Dual Persona System
+- **Storee** (Communication Architect) added as companion to Clippy
+- Storee architects the narrative: story structure, emotional arc, audience framing, bucket synthesis, pyramid principle
+- Clippy executes the design: visual coherence, accessibility, layout, diagram clarity
+- Handoff pattern: Storee defines WHAT to communicate, Clippy defines HOW to render it
+- Both personas fully genericized - work for any project (tech docs, business plans, recipes, portfolios)
+
+### New: Story-First Workflow
+- Documents are built narrative-first, not content-first
+- Three-step process: (1) narrative architecture, (2) content filling, (3) visual rendering
+- Prevents the #1 failure mode: technically accurate but narratively incoherent documents
+
+### New: Three-Act Progressive Disclosure
+- Act 1 (Vision): zero jargon, pure aspiration - non-technical readers stop here satisfied
+- Act 2 (Conceptual): mental models and analogies - product managers stop here informed
+- Act 3 (Technical): full specs and implementation - engineers stop here ready to build
+- Each act is self-contained with explicit transitions between them
+
+### New: Pre-Read Education Cards
+- Collapsed by default, comprehensive in depth
+- Must appear BEFORE the content they prepare for, never after
+- Long content (3-5 paragraphs minimum) so readers who expand get full understanding
+- Skip-safe: readers who know the concept lose nothing by skipping
+
+### New: Experience Architecture
+- Design what the reader FEELS, not just what they learn
+- Emotional targets per section (intrigued, convinced, empowered)
+- 3-5 designed aha moments at narrative climax points
+- Voice direction per act (storyteller, teacher, engineer)
+
+### New: The Greatness Standard
+- "Good enough" is the enemy of great documents
+- Self-challenge mandatory at every level: section, subsection, card, diagram
+- The question is never "does this work?" but "is this the absolute best version?"
+
+### New: Visual QA as Distinct Dimension
+- Content accuracy does not imply visual correctness - these are orthogonal
+- Both content QA and visual QA are mandatory before any deliverable ships
+
+### Updated: DesignSense V2
+- All V1 patterns preserved
+- Added: Story-First Workflow, Three-Act Progressive Disclosure, Pre-Read Cards, Experience Architecture, Greatness Standard, Visual QA
+- Added: Tailwind CSS safety rules (JIT purge protection, colorMap pattern mandatory)
+- Added: Advanced diagram standards (minimum font sizes, z-index discipline, mobile responsiveness)
+- All project-specific references removed - fully portable across any domain
+
+### Updated: README and START-HERE
+- References updated from Creative to Clippy + Storee dual persona system
+- Prompt updated with Story-First Workflow steps
+- Design principles expanded with V2 patterns
+- Project structure reflects new persona files
+
+### Renamed: Creative to Clippy
+- Creative Director persona renamed to Clippy (Design Specialist)
+- Same role, same depth, clearer name - Clippy builds tools and documents, doesn't own storytelling
+
+---
+
 ## v1.0.0 - Initial Release (2026-03-10)
 
-Packaged from Coco Loco Solution 2.0 after 6 sessions of iterative development.
+Initial release after 6 sessions of iterative development.
 
 ### Design System Learnings
 

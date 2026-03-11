@@ -10,7 +10,7 @@ export default function Sidebar({ isOpen, onClose }) {
   const addComment = () => {
     if (!newComment.trim()) return
     setComments(prev => [...prev, {
-      id: Date.now(), text: newComment, author: 'Waqas',
+      id: Date.now(), text: newComment, author: 'Reader',
       timestamp: new Date().toLocaleString(), status: 'open', replies: [],
     }])
     setNewComment('')
