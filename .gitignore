@@ -3,3 +3,13 @@ dist
 .DS_Store
 comments-export.json
 *.log
+
+# Environment & Secrets
+.env
+.env.*
+.env.local
+.env.production
+*.pem
+*.key
+credentials.json
+serviceAccountKey.json
